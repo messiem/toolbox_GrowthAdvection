@@ -1,0 +1,292 @@
+ 
+  If Ariane results are used in your publication(s),
+ please feel free to reference Ariane and to send us 
+        your publication references (thanks).
+ 
+         http://www.univ-brest.fr/lpo/ariane
+ 
+ =====================================================
+ =             -o0)  ARIANE v2.3.2_00  (0o-             =
+ =====================================================
+ 
+        (Ariane is governed by the CeCILL license)
+                (http://www.cecill.info)
+ 
+ =====================
+ = Machine precision =
+ =====================
+   -            iprec:           4
+   -            rprec:           8
+   -            qprec:           8
+   -     range(iprec):           9
+   -     range(rprec):         307
+   - Precision(rprec):          15
+   -   Spacing(rprec):   2.2204460492503131E-016
+   -   EPSILON(rprec):   2.2204460492503131E-016
+ 
+ ============
+ = NAMELIST =
+ ============
+  --- Successful Opening ---
+ 
+  - Reading ARIANE item:
+    - key_roms            =  F
+    - key_mars            =  F
+    - key_write_transport =  F
+    - key_symphonie       =  F
+    - key_B2C_grid        =  F
+    - key_sequential      =  T
+    - key_alltracers      =  F
+    - key_ascii_outputs   =  T
+    - key_iU_jV_kW        =  F
+    - mode                = qualitative
+    - forback             = forward
+    - bin                 = nobin
+    - nmax                =       300000
+    - tunit               =    86400.000000000000     
+    - ntfic               =            1
+    - tcyc                =   86400.000000000000     
+    - key_approximatesigma (OBSOLETE and FORCED)= T
+    - key_computesigma    = F
+    - memory_log          = T
+    - output_netcdf_large_file= F
+ 
+  - Reading SEQUENTIAL item:
+    - key_interp_temporal = F
+    - maxcycles           =           1
+ 
+  - Reading OPAPARAM item:
+    - imt                 =          99
+    - jmt                 =          79
+    - kmt                 =           2
+    - lmt                 =           1
+    - key_computew        = T
+    - key_partialsteps    = F
+    - key_jfold           = F
+    - pivot               =T
+    - key_periodic        = F
+    - w_surf_option       =     
+ 
+  - Reading ZONALCRT item:
+    - c_dir_zo            = ./currents_data
+    - c_prefix_zo         = toolbox_
+    - ind0_zo             =          184
+    - indn_zo             =          184
+    - maxsize_zo          =            7
+    - c_suffix_zo         = .nc
+    - nc_var_zo           = u
+    - nc_var_eivu         = NONE
+    - nc_att_mask_zo      = NONE
+ 
+  - Reading MERIDCRT item:
+    - c_dir_me            = ./currents_data
+    - c_prefix_me         = toolbox_
+    - ind0_me             =          184
+    - indn_me             =          184
+    - maxsize_me          =            7
+    - c_suffix_me         = .nc
+    - nc_var_me           = v
+    - nc_var_eivv         = NONE
+    - nc_att_mask_me      = NONE
+ 
+  - Reading MESH item:
+    - dir_mesh            = ./currents_data
+    - fn_mesh             = meshmask_toolbox.nc
+    - nc_var_xx_tt        = xt
+    - nc_var_xx_uu        = xu
+    - nc_var_yy_tt        = yt
+    - nc_var_yy_vv        = yv
+    - nc_var_zz_ww        = zw
+    - nc_var_e2u          = e2u
+    - nc_var_e1v          = e1v
+    - nc_var_e1t          = e1t
+    - nc_var_e2t          = e2t
+    - nc_var_e3t          = e3t
+    - nc_var_tmask        = tmask
+    - nc_mask_val         =    0.0000000000000000     
+ 
+  - Reading QUALITATIVE item:
+    - delta_t             =   17280.000000000000     
+    - frequency           =           1
+    - nb_output           =           0
+    - key_region          = F
+    - mask                = F
+ 
+                           -
+                          ---
+                        -------
+                      -----------
+                 -<>- QUALITATIVE -<>-
+                      -----------
+                        -------
+                          ---
+                           -
+ 
+ =======================
+ = criter0 source code =
+ =======================
+    !- ADD AT THE END OF EACH LINE "!!ctr0" -!
+    criter0=.TRUE.        !!ctr0
+ 
+ =======================
+ = criter1 source code =
+ =======================
+    !- ADD AT THE END OF EACH LINE "!!ctr1" -!
+    criter1=.FALSE.                          !!ctr1
+ 
+ =======================
+ = criter2 source code =
+ =======================
+    criter2=.FALSE.    !!ctr2
+ 
+ ========================
+ = Opening Output files =
+ ========================
+   - ASCII files -
+     - init.sav
+     - final.sav
+     - output
+     - traj.txt
+ 
+ ===================
+ = INPUT GRID DATA =
+ ===================
+ 
+ -> Netcdf File - Successful Opening -./currents_data/meshmask_toolbox.nc - ncid =        65536
+ TRIM(nc_var_name) = xt
+  - xt: max   -110.37500000000000       min   -134.87500000000000     
+ TRIM(nc_var_name) = xu
+  - xu: max   -110.25000000000000       min   -134.75000000000000     
+ TRIM(nc_var_name) = yt
+  - yt: max    47.625000000000000       min    28.125000000000000     
+ TRIM(nc_var_name) = yv
+  - yv: max    47.750000000000000       min    28.250000000000000     
+ TRIM(nc_var_name) = zw
+  - zw: max    9.9692099683868690E+036  min    5.0000000000000000     
+ TRIM(nc_var_name) = e2u
+  - e2u: max    27838.001569309556       min    27838.001569309556     
+ TRIM(nc_var_name) = e1v
+  - e1v: max    24522.237752551777       min    18717.348240517946     
+ TRIM(nc_var_name) = e1t
+  - e1t: max    24550.925540936976       min    18762.259401016283     
+ TRIM(nc_var_name) = e2t
+  - e2t: max    27838.001569309556       min    27838.001569309556     
+ TRIM(nc_var_name) = e3t
+  - e3t: max    9.9692099683868690E+036  min    10.000000000000000     
+ TRIM(nc_var_name) = tmask
+  - tmask: max    2.0000000000000000       min    1.0000000000000000     
+ mod_input_grid: sub_input_grid: we change to 1 the max tmask!
+  - tmask: max    1.0000000000000000       min    1.0000000000000000     
+ -> Netcdf File - Successful Closing - ncid =       65536
+ 
+  
+ 
+ =====================================================
+ = ALLOCATE INPUT GEOPHYSICAL DATA (sequential mode) =
+ =====================================================
+ 
+ ===============================
+ = INITIAL PARTICULE POSITIONS =
+ ===============================
+        (read or computed)
+   - Computing lmin in qualitative mode...
+     - lmin =           1
+ 
+ =================================================
+ = Create and Define NetCDF ouput POSITIONS file =
+ =================================================
+ --- Successful creation of ariane_trajectories_qualitative.nc ---       65536
+   - Dimensions in qualitative are:
+     - ntraj     =         510
+     - nb_output =           1
+ 
+   - Initial Positions in x are defined           1
+   - Initial Positions in y are defined           2
+   - Initial Positions in z are defined           3
+   - Initial Positions in t are defined           4
+   - Initial Ages are defined           5
+   - Initial transports are defined           6
+   - Final Positions in x are defined           7
+   - Final Positions in y are defined           8
+   - Final Positions in z are defined           9
+   - Final Positions in t are defined          10
+   - Final Ages are defined
+   - Final transports are defined          12
+   - Positions in x for trajectories are defined          13
+   - Positions in y for trajectories are defined          14
+   - Positions in z for trajectories are defined          15
+   - Positions in time for trajectories are defined          16
+   --- Dimension definitions are finished ---
+ 
+ ==================================
+ = ENTER >>>>> MAIN LOOP ON CYCLE =
+ ==================================
+
+ >>>>>>>>>>>>>>>>>>>>>>>>
+ >>  Cycle :            0
+ <<<<<<<<<<<<<<<<<<<<<<<<
+ ---------------------------------
+ - READ INPUT DATA :           1 -
+ 
+ -> Netcdf File - Successful Opening -./currents_data/toolbox_0000184.nc - ncid =       131072
+ TRIM(nc_var_name) = u
+ -> Netcdf File - Successful Closing - ncid =      131072
+ 
+ 
+ -> Netcdf File - Successful Opening -./currents_data/toolbox_0000184.nc - ncid =       131072
+ TRIM(nc_var_name) = v
+ -> Netcdf File - Successful Closing - ncid =      131072
+ 
+ 
+   - Vertical Transport is computing
+ 
+ --- Initial positions are saving:        65536
+   - Initial X is done
+   - Initial Y is done
+   - Initial Z is done
+   - Initial Time is done
+   - Initial Age is done
+   - Initial Transport is done
+ 
+ ==================================
+ = MAIN LOOP ON CYCLE >>>>>> EXIT =
+ ==================================
+ 
+ -----------------------
+ = Writing Output Data =
+ -----------------------
+ 
+ --- Trajectory positions are saving:        65536
+   - X is done
+   - Y is done
+   - Z is done
+   - Time is done
+ 
+ --- Final positions are saving:        65536
+   - Final X is done
+   - Final Y is done
+   - Final Z is done
+   - Final Time is done
+   - Final Age is done
+   - Final Transport is done
+ 
+ -------------------------------
+ = Close Positions NetCDF File =
+ -------------------------------
+   - unit number       65536
+ 
+ ---------------------
+ = Deallocate Memory =
+ ---------------------
+ 
+  Ariane max allocatable memory is (in MB):    103.24242782592773     
+ 
+ =====================================================
+ =             -o0)  ARIANE Finish  (0o-             =
+ =====================================================
+ 
+  If Ariane results are used in your publication(s),
+ please feel free to reference Ariane and to send us 
+        your publication references (thanks).
+ 
+         http://www.univ-brest.fr/lpo/ariane

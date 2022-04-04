@@ -1,0 +1,70 @@
+&ARIANE
+	key_alltracers =.FALSE.,
+	key_sequential =.TRUE.,
+	key_ascii_outputs =.TRUE.,
+	mode ='qualitative',
+	forback ='forward',
+	bin ='nobin',
+	init_final ='init',
+	nmax =300000,
+	tunit =86400.,
+	ntfic =1,
+	tcyc =86400.,
+/
+&OPAPARAM
+	imt =99
+	jmt =79,
+	kmt =2,
+	lmt =1,
+	key_periodic =.FALSE.,
+	key_jfold =.FALSE.,
+	key_computew =.TRUE.,
+	key_partialsteps =.FALSE.,
+/
+&SEQUENTIAL
+	maxcycles =1,
+/
+&QUALITATIVE
+	delta_t =17280.,
+	frequency =1,
+	nb_output =0,
+	key_region =.FALSE.,
+/
+&ZONALCRT
+	c_dir_zo ='./currents_data',
+	c_prefix_zo ='toolbox_',
+	ind0_zo =184,
+	indn_zo =184,
+	maxsize_zo =7,
+	c_suffix_zo ='.nc',
+	nc_var_zo ='u',
+	nc_var_eivu ='NONE',
+	nc_att_mask_zo ='NONE',
+/
+&MERIDCRT
+	c_dir_me ='./currents_data',
+	c_prefix_me ='toolbox_',
+	ind0_me =184,
+	indn_me =184,
+	maxsize_me =7,
+	c_suffix_me ='.nc',
+	nc_var_me ='v',
+	nc_var_eivv ='NONE',
+	nc_att_mask_me ='NONE',
+/
+&MESH
+	dir_mesh ='./currents_data',
+	fn_mesh ='meshmask_toolbox.nc',
+	nc_var_xx_tt ='xt',
+	nc_var_xx_uu ='xu',
+	nc_var_yy_tt ='yt',
+	nc_var_yy_vv ='yv',
+	nc_var_zz_ww ='zw',
+	nc_var_e2u ='e2u',
+	nc_var_e1v ='e1v',
+	nc_var_e1t ='e1t',
+	nc_var_e2t ='e2t',
+	nc_var_e3t ='e3t',
+	nc_var_tmask ='tmask',
+	nc_mask_val =0.,
+/
