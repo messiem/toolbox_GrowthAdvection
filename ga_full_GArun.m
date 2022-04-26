@@ -22,9 +22,9 @@ function ga_full_GArun(Nsupply_struct,name_curr,varargin)
 %	monthly maps (one file)
 %
 % Monique Messié, 2021 for public version
-% Reference: Messié, M., D. A. Sancho-Gallegos, J. Fiechter, J. A. Santora, and F. P. Chavez (submitted). 
+% Reference: Messié, M., D. A. Sancho-Gallegos, J. Fiechter, J. A. Santora, and F. P. Chavez (2022). 
 %			Satellite-based Lagrangian model reveals how upwelling and oceanic circulation shape krill hotspots in the California Current System.
-%			Frontiers in Marine Science
+%			Frontiers in Marine Science, in press, https://doi.org/10.3389/fmars.2022.835813
 
 
 		

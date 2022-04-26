@@ -2,13 +2,12 @@
 
 ### Description
 
-This toolbox contains the Matlab programs necessary to run the growth-advection method to predict zooplankton hotspots from nitrate supply in upwelling systems (https://www.mbari.org/science/upper-ocean-systems/biological-oceanography/krill-hotspots-in-the-california-current/).  
+This toolbox contains the Matlab programs necessary to run the growth-advection method to predict krill hotspots from nitrate supply in the California upwelling system (https://www.mbari.org/science/upper-ocean-systems/biological-oceanography/krill-hotspots-in-the-california-current/).  
 This work was primarily funded by NASA (80NSSC17K0574) with additional support from Horizon 2020 (Marie Skłodowska-Curie grant agreement SAPPHIRE No. 746530) and the David and Lucile Packard Foundation.  
 Trajectories are computed using a custom 2D version of the Lagrangian computational tool Ariane (http://stockage.univ-brest.fr/~grima/Ariane/).  
 The programs are written for Matlab running on Linux (because of Ariane).  
   
-*Note - The same programs can be used to reproduce the growth-advection application to non-diazotroph / diazotroph succession and the delayed island mass effect described in Messié et al. (2020).*   
-*If this application is of interest, please contact me and I will add the corresponding functions.*
+*Note - The same programs can be used to reproduce the growth-advection application to non-diazotroph / diazotroph succession and the delayed island mass effect described in Messié et al. (2020). If this application is of interest, please contact me and I will add the corresponding functions.*
 
 
 ### Pre-requisite
@@ -41,7 +40,7 @@ Add to the Matlab path (e.g., in `utils/`)
 
 ### Get started
 
-For examples on how to run the toolbox, see script:  
+For examples on how to set up and run the toolbox, see script:  
 
 	start_GA_toolbox
 
@@ -63,8 +62,7 @@ GlobCurrent total 15m currents downloaded from Copernicus, dataset ID MULTIOBS_G
 https://resources.marine.copernicus.eu/?option=com_csw&view=details&product_id=MULTIOBS_GLO_PHY_REP_015_004  
 
 Nitrate supply for the California Current at monthly 3km resolution in 2008 (in `inputs/`):  
-Computed following Messié and Chavez (2015, see also https://www.mbari.org/science/upper-ocean-systems/biological-oceanography/nitrate-supply-estimates-in-upwelling-systems/),  
-then converted into a volumetric flux following Messié and Chavez (2017), and regridded on a 3km latitude grid.  
+Computed following Messié and Chavez (2015, see also https://www.mbari.org/science/upper-ocean-systems/biological-oceanography/nitrate-supply-estimates-in-upwelling-systems/), then converted into a volumetric flux following Messié and Chavez (2017), and regridded on a 3km latitude grid.  
 Instead of QuikSCAT, winds were obtained from CCMP (http://data.remss.com/ccmp/v02.0/).
 
 * * *
@@ -74,35 +72,31 @@ Instead of QuikSCAT, winds were obtained from CCMP (http://data.remss.com/ccmp/v
 #### Toolbox
 Please refer this paper when using the toolbox (available upon request):  
 
-Messié, M., D. A. Sancho-Gallegos, J. Fiechter, J. A. Santora, and F. P. Chavez (submitted). **Satellite-based Lagrangian model reveals how upwelling and oceanic circulation shape krill hotspots in the California Current System.**  
-&nbsp; &nbsp; &nbsp; &nbsp; *Frontiers in Marine Science*.
+Messié, M., D. A. Sancho-Gallegos, J. Fiechter, J. A. Santora, and F. P. Chavez (2022). **Satellite-based Lagrangian model reveals how upwelling and oceanic circulation shape krill hotspots in the California Current System.** *Frontiers in Marine Science*, in press, https://doi.org/10.3389/fmars.2022.835813.  
+  
+#### Other growth-advection applications
+Messié, M., and F. P. Chavez (2017). **Nutrient supply, surface currents, and plankton dynamics predict zooplankton hotspots in coastal upwelling systems.** *Geophysical Research Letters*, 44(17), 8979-8986, https://doi.org/10.1002/2017GL074322  
+  
+Messié, M., Petrenko, A., Doglioli, A. M., Aldebert, C., Martinez, E., Koenig, G., Bonnet, S., and Moutin, T. (2020). **The delayed island mass effect: How islands can remotely trigger blooms in the oligotrophic ocean.** *Geophysical Research Letters*, 47(2), e2019GL085282, https://doi.org/10.1029/2019GL085282 
+  
+#### Nitrate supply
+Messié, M., and F. P. Chavez (2015). **Seasonal regulation of primary production in eastern boundary upwelling systems.** *Progress in Oceanography*, 134, 1-18, https://doi.org/10.1016/j.pocean.2014.10.011  
+  
+See https://www.mbari.org/science/upper-ocean-systems/biological-oceanography/nitrate-supply-estimates-in-upwelling-systems/  
   
 #### Ariane
 Please also refer to Ariane if using it to compute current trajectories:   
 
-Blanke, B., and Raynaud, S. (1997). **Kinematics of the Pacific Equatorial Undercurrent: An Eulerian and Lagrangian approach from GCM results.**   
-&nbsp; &nbsp; &nbsp; &nbsp; *Journal of Physical Oceanography*, 27(6), 1038-1053.
-  
-#### Growth-advection applications
-Messié, M., and F. P. Chavez (2017). **Nutrient supply, surface currents, and plankton dynamics predict zooplankton hotspots in coastal upwelling systems.**  
-&nbsp; &nbsp; &nbsp; &nbsp; *Geophysical Research Letters*, 44(17), 8979-8986, https://doi.org/10.1002/2017GL074322  
-Messié, M., Petrenko, A., Doglioli, A. M., Aldebert, C., Martinez, E., Koenig, G., Bonnet, S., and Moutin, T. (2020). **The delayed island mass effect: How islands can remotely trigger blooms in the oligotrophic ocean.**  
-&nbsp; &nbsp; &nbsp; &nbsp; *Geophysical Research Letters*, 47(2), e2019GL085282, https://doi.org/10.1029/2019GL085282 
-  
-#### Nitrate supply
-Messié, M., and F. P. Chavez (2015). **Seasonal regulation of primary production in eastern boundary upwelling systems.**  
-&nbsp; &nbsp; &nbsp; &nbsp; *Progress in Oceanography*, 134, 1-18, https://doi.org/10.1016/j.pocean.2014.10.011  
-See https://www.mbari.org/science/upper-ocean-systems/biological-oceanography/nitrate-supply-estimates-in-upwelling-systems/  
+Blanke, B., and Raynaud, S. (1997). **Kinematics of the Pacific Equatorial Undercurrent: An Eulerian and Lagrangian approach from GCM results.** *Journal of Physical Oceanography*, 27(6), 1038-1053.
 
 #### 2D custom version of Ariane 
 
-Dobler, D., Huck, T., Maes, C., Grima, N., Blanke, B., Martinez, E., and Ardhuin, F. (2019). **Large impact of Stokes drift on the fate of surface floating debris in the South Indian Basin.**   
-&nbsp; &nbsp; &nbsp; &nbsp; *Marine pollution bulletin*, 148, 202-209, https://doi.org/10.1016/j.marpolbul.2019.07.057  
-Maes, C., Grima, N., Blanke, B., Martinez, E., Paviet‐Salomon, T., and Huck, T. (2018). **A surface “superconvergence” pathway connecting the South Indian Ocean to the subtropical South Pacific gyre.**  
-&nbsp; &nbsp; &nbsp; &nbsp; *Geophysical Research Letters*, 45(4), 1915-1922, https://doi.org/10.1002/2017GL076366  
-Messié, M., Petrenko, A., Doglioli, A. M., Aldebert, C., Martinez, E., Koenig, G., Bonnet, S., and Moutin, T. (2020). **The delayed island mass effect: How islands can remotely trigger blooms in the oligotrophic ocean.**  
-&nbsp; &nbsp; &nbsp; &nbsp; *Geophysical Research Letters*, 47(2), e2019GL085282, https://doi.org/10.1029/2019GL085282 
-
+Dobler, D., Huck, T., Maes, C., Grima, N., Blanke, B., Martinez, E., and Ardhuin, F. (2019). **Large impact of Stokes drift on the fate of surface floating debris in the South Indian Basin.** *Marine pollution bulletin*, 148, 202-209, https://doi.org/10.1016/j.marpolbul.2019.07.057  
+  
+Maes, C., Grima, N., Blanke, B., Martinez, E., Paviet‐Salomon, T., and Huck, T. (2018). **A surface “superconvergence” pathway connecting the South Indian Ocean to the subtropical South Pacific gyre.** *Geophysical Research Letters*, 45(4), 1915-1922, https://doi.org/10.1002/2017GL076366  
+  
+Messié, M., Petrenko, A., Doglioli, A. M., Aldebert, C., Martinez, E., Koenig, G., Bonnet, S., and Moutin, T. (2020). **The delayed island mass effect: How islands can remotely trigger blooms in the oligotrophic ocean.** *Geophysical Research Letters*, 47(2), e2019GL085282, https://doi.org/10.1029/2019GL085282 
+  
 * * *
 
 ### Contact
