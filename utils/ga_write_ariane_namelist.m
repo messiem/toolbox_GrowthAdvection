@@ -10,9 +10,9 @@ function ga_write_ariane_namelist(name_curr,varargin)
 % 'nbdays_advec' 	number of days to run the advection (required)
 % 'dtcurr'			current time step, in days (required)
 % 'itime_curr'		beginning and end current indices (required)
-% 'backwards'		backward calculation (forward by default)
+% 'backward'		backward calculation (forward by default)
 %
-% For instance (add 'backwards' for backward calculation):
+% For instance (add 'backward' for backward calculation):
 % ga_write_ariane_namelist(name_curr,'dt',0.2,'nbdays_advec',60,'dtcurr',1,'itime_curr',[1 60])
 %
 % Monique Messié, May 2021
@@ -20,12 +20,12 @@ function ga_write_ariane_namelist(name_curr,varargin)
 
 global dir_ariane_global
 
-[arg,flag]=ga_read_varargin(varargin,{'dt',[],'nbdays_advec',[],'dtcurr',[],'itime_curr',[]},{'backwards'});
+[arg,flag]=ga_read_varargin(varargin,{'dt',[],'nbdays_advec',[],'dtcurr',[],'itime_curr',[]},{'backward'});
 if isempty(arg.dt), error('Need to provide dt'), end
 if isempty(arg.nbdays_advec), error('Need to provide nbdays_advec'), end
 if isempty(arg.dtcurr), error('Need to provide dtcurr'), end
 if isempty(arg.itime_curr), error('Need to provide itime_curr'), end
-if flag.backwards, forback='backward'; else, forback='forward'; end
+if flag.backward, forback='backward'; else, forback='forward'; end
 
 
 % getting grid size

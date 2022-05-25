@@ -14,12 +14,12 @@ function positions=ga_advection_ariane(pos_ini,name_curr,varargin)
 % 'dt' 				output resolution (default 0.2 days). NOTE: for Ariane dt impacts the output resolution only, NOT the result (small dt slightly increases processing time).
 % 'time0' 			initial time (default first current time step)
 % 'nbdays_advec'	trajectory length (in days, default maximum ie as long as currents are available)
-% 'backwards'		backward instead of forward calculations
+% 'backward'		backward instead of forward calculations
 %
 % For instance, to change nbdays_advec:
 % 	positions=ga_advection_ariane(pos_ini,name_curr,'nbdays_advec',100)
 % To run a backward calculation starting at time0 (which is then the end of the trajectory):
-% 	positions=ga_advection_ariane(pos_ini,name_curr,'time0',time0,'backwards')
+% 	positions=ga_advection_ariane(pos_ini,name_curr,'time0',time0,'backward')
 %
 % Monique Messié, 2021 for public version
 % Reference: Messié, M., Petrenko, A., Doglioli, A. M., Aldebert, C., Martinez, E., Koenig, G., Bonnet, S., and Moutin, T. (2020)
@@ -29,7 +29,7 @@ function positions=ga_advection_ariane(pos_ini,name_curr,varargin)
 
 
 global dir_ariane_global
-[arg,flag]=ga_read_varargin(varargin,{'dt',0.2,'time0',[],'nbdays_advec',[]},{'backwards'});
+[arg,flag]=ga_read_varargin(varargin,{'dt',0.2,'time0',[],'nbdays_advec',[]},{'backward'});
 if isempty(pos_ini)
 	positions=struct();
 	for varname={'lon2D','lat2D','time','lon_ini','lat_ini'}, varname=varname{:}; positions.(varname)=NaN; return, end
@@ -53,11 +53,11 @@ for itime=1:length(list_curr), time_curr(itime)=ncread([rep_curr,list_curr{itime
 
 % write namelist
 if isempty(arg.time0)
-	if flag.backwards, arg.time0=max(time_curr); else, arg.time0=min(time_curr); end
+	if flag.backward, arg.time0=max(time_curr); else, arg.time0=min(time_curr); end
 end
 if arg.time0<min(time_curr) || arg.time0>max(time_curr), error('time0 must be within the current time period'), end
 if isempty(arg.nbdays_advec), arg.nbdays_advec=max(time_curr)-arg.time0; end
-if flag.backwards, itime_curr=[interp1(time_curr,1:length(time_curr),arg.time0-arg.nbdays_advec,'nearest') interp1(time_curr,1:length(time_curr),arg.time0,'nearest')]; 
+if flag.backward, itime_curr=[interp1(time_curr,1:length(time_curr),arg.time0-arg.nbdays_advec,'nearest') interp1(time_curr,1:length(time_curr),arg.time0,'nearest')]; 
 else, itime_curr=[interp1(time_curr,1:length(time_curr),arg.time0,'nearest') interp1(time_curr,1:length(time_curr),arg.time0+arg.nbdays_advec,'nearest')]; 
 end
 if isnan(itime_curr(2)), disp('Not enough current temporal coverage, adjusting nbdays_advec')
@@ -98,12 +98,12 @@ time_expected=(0:arg.dt:nbdays_advec)';
 ncfile=[dir_ariane_global,'ariane_trajectories_qualitative.nc'];
 time_all=ncread(ncfile,'traj_time'); time_all=time_all(1,:)'; 
 time_all(time_all==ncreadatt(ncfile,'traj_time','missing_value'))=NaN;
-if flag.backwards, time_all=-time_all; time_expected=-time_expected; end
+if flag.backward, time_all=-time_all; time_expected=-time_expected; end
 if max(abs(time_all(:)-time_expected(:)))>1E-10, error('check time expected'), end
 
 % load results: positions
 positions=struct();
-positions.time=time_expected+arg.time0;	% using time_expected because time_all is at 0 for particles outside the domain which screws up the time sorting in backwards
+positions.time=time_expected+arg.time0;	% using time_expected because time_all is at 0 for particles outside the domain which screws up the time sorting in backward
 positions.lon_ini=pos_ini(:,1);
 positions.lat_ini=pos_ini(:,2);
 positions.lon2D=nan(length(positions.lon_ini),arg.nbdays_advec/arg.dt+1);
@@ -119,8 +119,8 @@ end
 positions.lon2D(positions.lon2D==ncreadatt(ncfile,'traj_lon','missing_value'))=NaN;
 positions.lat2D(positions.lat2D==ncreadatt(ncfile,'traj_lat','missing_value'))=NaN;
 
-% Put positions back in the correct order for backwards
-if flag.backwards
+% Put positions back in the correct order for backward
+if flag.backward
 	[~,isort]=sort(positions.time);
 	positions.time=positions.time(isort);
 	positions.lon2D=positions.lon2D(:,isort);
