@@ -1,14 +1,14 @@
 %% START_GA_TOOLBOX: examples to run the model
 % Reference: Messié, M., D. A. Sancho-Gallegos, J. Fiechter, J. A. Santora, and F. P. Chavez (2022). 
 % 	Satellite-based Lagrangian model reveals how upwelling and oceanic circulation shape krill hotspots in the California Current System.
-%	Frontiers in Marine Science, in press, https://doi.org/10.3389/fmars.2022.835813
+%	Frontiers in Marine Science, 9:835813, https://doi.org/10.3389/fmars.2022.835813
 
 
 
 
 %% --------------------------------------------- Set up ----------------------------------------------- %%
 
-% Set directory where Ariane is installed (used in most functions)
+% Set directory where Ariane configuration files are (used in most functions). This is different from the directory where Ariane is installed.
 % There must be a directory "currents_data" inside dir_ariane_global where currents netcdf files are saved (see ga_write_ariane_currents)
 global dir_ariane_global
 dir_ariane_global='Ariane_workplace/';
@@ -29,7 +29,7 @@ addpath('utils')
 % Reproduce Fig. 2 in Messié & Chavez (2017), model parameterized based on copepods.
 ga_model_2P2Z_fromNsupply(1.3/16*106,'plot')
 
-% Display the model output behind Fig. 1a in Messié et al. (in prep), 
+% Display the model output behind Fig. 1a in Messié et al. (2022), 
 % changing gmax_big, eZ and mZ relative to the default values parameterizes the model for krill.
 output=ga_model_2P2Z_fromNsupply(11.2,'gmax_big',0.6*0.6,'eZ',0.1*0.6,'mZ',0.05*16/106*0.6,'plot');
 print('-djpeg','-r300','outputs/plankton_model.jpg')
