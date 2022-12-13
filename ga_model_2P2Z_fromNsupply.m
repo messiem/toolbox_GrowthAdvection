@@ -44,8 +44,8 @@ function varargout=ga_model_2P2Z_fromNsupply(Nsupply,varargin)
 default_parameters={...
 'umax_small',2,'umax_big',3,'gmax_small',1,'gmax_big',0.6,...	% maximum growth and grazing rates (d^{-1})
 'cChl_small',200,'cChl_big',50,...								% C:Chl ratios for Psmall and Pbig (only used to calculate Chl) (gC/gChl)
-'kNreg',0.5/16*106,...											% half-saturation constant for Psmall on NH4 (mmolC m^{-3})
-'kNnew',0.75/16*106,...											% half-saturation constant for Pbig on NO3 (mmolC m^{-3})
+'kNreg_small',0.5/16*106,...											% half-saturation constant for Psmall on NH4 (mmolC m^{-3})
+'kNnew_big',0.75/16*106,...											% half-saturation constant for Pbig on NO3 (mmolC m^{-3})
 'kG_small',1/16*106,...											% half-saturation constant for Zsmall on Psmall (mmolC m^{-3})
 'kG_big',3/16*106,...											% half-saturation constant for Zbig on Pbig and Zsmall (mmolC m^{-3})
 'mP',0,...														% Pbig mortality rate (default 0 ie no Pbig sinking) (d^{-1})
@@ -110,8 +110,8 @@ Nnew(1)=Nsupply(1)*arg.dt; Nreg(1)=0;
 for t=2:nb_time
 
 	% growth and grazing rates
-	u_big(t-1)=Nnew(t-1)/(arg.kNnew+Nnew(t-1))*arg.umax_big;
-	u_small(t-1)=Nreg(t-1)/(arg.kNreg+Nreg(t-1))*arg.umax_small;
+	u_big(t-1)=Nnew(t-1)/(arg.kNnew_big+Nnew(t-1))*arg.umax_big;
+	u_small(t-1)=Nreg(t-1)/(arg.kNreg_small+Nreg(t-1))*arg.umax_small;
 	g_big1=P_big(t-1)/(arg.kG_big+Z_small(t-1)+P_big(t-1))*arg.gmax_big; 	
 	g_big2=Z_small(t-1)/(arg.kG_big+Z_small(t-1)+P_big(t-1))*arg.gmax_big;
 	g_big(t-1)=g_big1+g_big2;
