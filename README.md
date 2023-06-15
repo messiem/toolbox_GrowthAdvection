@@ -6,7 +6,7 @@
 
 This toolbox contains the Matlab programs necessary to run the growth-advection method to predict krill hotspots from nitrate supply in the California upwelling system (Messié et al. 2022, results available at https://www.mbari.org/science/upper-ocean-systems/biological-oceanography/krill-hotspots-in-the-california-current/).  
 This work was primarily funded by NASA (80NSSC17K0574) with additional support from Horizon 2020 (Marie Skłodowska-Curie grant agreement SAPPHIRE No. 746530) and the David and Lucile Packard Foundation.  
-Trajectories are computed using a custom 2D version of the Lagrangian computational tool Ariane (see http://stockage.univ-brest.fr/~grima/Ariane/ for the official 3D version and general information on Ariane).  
+Trajectories are computed using a custom 2D version of the Lagrangian computational tool Ariane (see http://ariane.lagrangian.free.fr/ for the official 3D version and general information on Ariane).  
 The programs are written for Matlab running on Linux (because of Ariane).  
   
 *Note - The same programs can be used to reproduce the growth-advection application to non-diazotroph / diazotroph succession and the delayed island mass effect described in Messié et al. (2020). If this application is of interest, please contact me and I will add the corresponding functions.*
@@ -17,7 +17,7 @@ The programs are written for Matlab running on Linux (because of Ariane).
 #### 1. Install Ariane
 
 The toolbox uses a custom version of Ariane specifically designed for surface (2D) trajectories, used in previous studies (see references below).  
-This version is NOT the 3D version available on the Ariane website; the custom 2D version is available upon request to Nicolas Grima or Bruno Blanke (see section "Contact us" on the Ariane website http://stockage.univ-brest.fr/~grima/Ariane/).
+This version is NOT the 3D version available on the Ariane website; the custom 2D version is available upon request to Nicolas Grima or Bruno Blanke (contact information at http://ariane.lagrangian.free.fr/contact.html).
 
 Install packages `gfortran`, `libnetcdf-dev` and `libnetcdff-dev`.  
 Check that `nc-config --has-fortran` returns yes.
