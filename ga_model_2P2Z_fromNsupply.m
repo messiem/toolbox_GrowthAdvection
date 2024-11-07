@@ -2,20 +2,21 @@ function varargout=ga_model_2P2Z_fromNsupply(Nsupply,varargin)
 
 
 %% GA_MODEL_2P2Z_FROMNSUPPLY: plankton model used to model zooplankton hotspots
-% Default parameters are based on MessiÃ© & Chavez (2017).
+% Default parameters are based on copepods (Messié & Chavez, 2017); 
+% see l. 32 for default parameters based on krill (Messié et al., 2022)
 % 
 % Use:
 % [output=]ga_model_2P2Z_fromNsupply(Nsupply,varargin)
 %
 % output is a structure containing 
 %	.time, .Nsupply, .P_small, .P_big, .Z_small, .Z_big, 
-%	.Nnew, .Nreg, .Chl, .PP, .u_small, .u_big, .g_small, .g_big, 
+%	.Nnew, .Nreg, .Chl, .PP, .Cproduction, .u_small, .u_big, .g_small, .g_big, 
 %	.units, .attributs
 %
 % Required input:
 % 	Nsupply expressed in mmolC/m3/d, all units are carbon-based. Note - Nnew and Nreg represent new and regenerated nutrients, respectively
 %		(NO3 and NH4 as a simplification) but are termed "Nnew" and "Nreg" to limit confusion with the unit, since they are expressed in carbon.
-% 	Nsupply can be either a number, corresponding to the rate observed during upw_duration (default 1 day following MessiÃ© & Chavez 2017)
+% 	Nsupply can be either a number, corresponding to the rate observed during upw_duration (default 1 day following Messié & Chavez 2017)
 %					or a vector (then time needs to be given), that provides Nsupply as a function of time along a current trajectory,
 %					for instance (useful to take Ekman pumping into account)
 %
@@ -27,30 +28,30 @@ function varargout=ga_model_2P2Z_fromNsupply(Nsupply,varargin)
 % 'plot'			displays the plankton model outputs as a function of time
 %
 % Examples of use:
-% ga_model_2P2Z_fromNsupply(1.3/16*106,'plot')				to reproduce Fig. 2 in MessiÃ© & Chavez 2017 (Nsupply = 1.3 mmolN/m3/d)
-% ga_model_2P2Z_fromNsupply(11.2,'gmax_big',0.6*0.6,'eZ',0.1*0.6,'mZ',0.05*16/106*0.6,'plot')	to reproduce part of Fig. 1 in MessiÃ© et al. (in prep)
+% ga_model_2P2Z_fromNsupply(1.3/16*106,'plot')				to reproduce Fig. 2 in Messié & Chavez 2017 (Nsupply = 1.3 mmolN/m3/d)
+% ga_model_2P2Z_fromNsupply(11.2,'gmax_big',0.6*0.6,'eZ',0.1*0.6,'mZ',0.05*16/106*0.6,'plot')	to reproduce part of Fig. 1 in Messié et al. (2022)
 % 
-% Monique MessiÃ©, 2021 for public version
-% Reference: MessiÃ©, M., & Chavez, F. P. (2017). Nutrient supply, surface currents, and plankton dynamics predict zooplankton hotspots 
+% Monique Messié, 2021 for public version
+% Reference: Messié, M., & Chavez, F. P. (2017). Nutrient supply, surface currents, and plankton dynamics predict zooplankton hotspots 
 %					in coastal upwelling systems. Geophysical Research Letters, 44(17), 8979-8986, https://doi.org/10.1002/2017GL074322
-% Differences with MessiÃ© and Chavez (2017):
-%		all Zsmall excretion is now availabe as regenerated nutrients (ie no export on Zsmall excretion)
+% Differences with Messié and Chavez (2017):
+%		all Zsmall excretion is now availabe as regenerated nutrients (ie no Cproduction on Zsmall excretion)
 %		Zbig grazing formulation is different with the half-saturation constant applying to Z_small+P_big in both cases
 
 
-%% -------------- Default parameters (see MessiÃ© & Chavez, 2017 suppl inf)
+%% -------------- Default parameters (see Messié & Chavez, 2017 suppl inf)
 
 
 default_parameters={...
 'umax_small',2,'umax_big',3,'gmax_small',1,'gmax_big',0.6,...	% maximum growth and grazing rates (d^{-1})
 'cChl_small',200,'cChl_big',50,...								% C:Chl ratios for Psmall and Pbig (only used to calculate Chl) (gC/gChl)
-'kNreg_small',0.5/16*106,...											% half-saturation constant for Psmall on NH4 (mmolC m^{-3})
-'kNnew_big',0.75/16*106,...											% half-saturation constant for Pbig on NO3 (mmolC m^{-3})
+'kNreg_small',0.5/16*106,...									% half-saturation constant for Psmall on NH4 (mmolC m^{-3})
+'kNnew_big',0.75/16*106,...										% half-saturation constant for Pbig on NO3 (mmolC m^{-3})
 'kG_small',1/16*106,...											% half-saturation constant for Zsmall on Psmall (mmolC m^{-3})
 'kG_big',3/16*106,...											% half-saturation constant for Zbig on Pbig and Zsmall (mmolC m^{-3})
 'mP',0,...														% Pbig mortality rate (default 0 ie no Pbig sinking) (d^{-1})
 'mZ',0.05*16/106,...											% Zbig quadratic mortality rate (mmolC^{-1} m^{3} d^{-1})
-'eZ',0.1,...													% zoo excretion fration (Zsmall and Zbig) (d^{-1})
+'eZ',0.1,...													% zoo excretion rate (Zsmall and Zbig) (d^{-1})
 'epsilon',0.25,...												% fraction of Zbig excretion that is available as regenerated nutrients
 'P_small_ini',2,'P_big_ini',4,'Z_small_ini',1,'Z_big_ini',2};	% initial biomass (mmolC m^{-3})
 
@@ -69,7 +70,7 @@ nb_time=length(time);
 
 %% -------------- Nsupply
 
-if length(Nsupply)==1
+if isscalar(Nsupply)
 	Nsupply_max=Nsupply; 
 	Nsupply=zeros(nb_time,1);
 	Nsupply(time<arg.upw_duration)=Nsupply_max; 
@@ -142,17 +143,21 @@ for t=2:nb_time
 	Z_big(t)=Z_big(t-1)+G_big1(t)*arg.dt+G_big2(t)*arg.dt-excretion_Zbig(t)*arg.dt-death_Zbig(t)*arg.dt; Z_big(Z_big<=0)=0;
 
 end
+Cproduction=death_Pbig+(1-arg.epsilon)*excretion_Zbig;
+% Note: in steady-state, Nsupply=death_Zbig+Cproduction
 
 
 %% -------------- Ouputs
 
 units=struct('time','days','Nsupply','mmolC m^{-3} d^{-1}',...
 	'P_small','mmolC m^{-3}','P_big','mmolC m^{-3}','Z_small','mmolC m^{-3}','Z_big','mmolC m^{-3}',...
-	'Nnew','mmolC m^{-3}','Nreg','mmolC m^{-3}','Chl','mg m^{-3}','PP','gC m^{-3}/yr',...
+	'Nnew','mmolC m^{-3}','Nreg','mmolC m^{-3}','Chl','mg m^{-3}','PP','mgC m^{-3} d^{-1}',...
+	'Cproduction','mgC m^{-3} d^{-1}',...
 	'u_small','d^{-1}','u_big','d^{-1}','g_small','d^{-1}','g_big','d^{-1}');
 output=struct('units',units,'time',time,'Nsupply',Nsupply,...
 	'P_small',P_small,'P_big',P_big,'Z_small',Z_small,'Z_big',Z_big,'Nnew',Nnew,'Nreg',Nreg,...
-	'Chl',P_small*12/arg.cChl_small+P_big*12./arg.cChl_big,'PP',(PP_big+PP_small)*1E-3*12*365.25,...
+	'Chl',P_small*12/arg.cChl_small+P_big*12./arg.cChl_big,'PP',(PP_big+PP_small)*12,...
+	'Cproduction',Cproduction*12,...
 	'u_small',u_small,'u_big',u_big,'g_small',g_small,'g_big',g_big,'attributs',struct('arg',arg));
 varargout={output}; varargout=varargout(1:nargout);
 

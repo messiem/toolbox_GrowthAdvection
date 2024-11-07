@@ -10,7 +10,9 @@ function index=ga_find_index(series,target_value)
 
 
 index=[];
-if isnan(target_value), return, end
+if isnan(target_value) || ~max(series<=target_value) || ~max(series>=target_value)		% series must cross target_value for index to exist
+	return
+end
 
 ipts=find(~isnan(series),1,'first');
 while ipts<length(series)

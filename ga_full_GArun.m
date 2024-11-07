@@ -21,8 +21,8 @@ function ga_full_GArun(Nsupply_struct,name_curr,varargin)
 % 	daily trajectories computed by ga_growthadvection (saved yearly)
 %	monthly maps (one file)
 %
-% Monique MessiÃ©, 2021 for public version
-% Reference: MessiÃ©, M., D. A. Sancho-Gallegos, J. Fiechter, J. A. Santora, and F. P. Chavez (2022). 
+% Monique Messié, 2021 for public version
+% Reference: Messié, M., D. A. Sancho-Gallegos, J. Fiechter, J. A. Santora, and F. P. Chavez (2022). 
 %			Satellite-based Lagrangian model reveals how upwelling and oceanic circulation shape krill hotspots in the California Current System.
 %			Frontiers in Marine Science, in press, https://doi.org/10.3389/fmars.2022.835813
 
